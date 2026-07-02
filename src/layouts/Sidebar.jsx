@@ -1,7 +1,7 @@
 import SidebarItem from "./SidebarItem";
 import ExpandSidebarItem from "./ExpandSidebarItem";
 
-function Sidebar() {
+function Sidebar({ activeFilter, setActiveFilter }) {
   return (
     <aside className="w-64 min-h-screen bg-gradient-to-b from-violet-700 via-purple-700 to-fuchsia-700 p-6 text-white flex-shrink-0 flex flex-col hidden lg:flex">
       {/* Logo */}
@@ -22,7 +22,7 @@ function Sidebar() {
       {/* Nav */}
       <nav className="space-y-1 flex-1">
         <SidebarItem icon="dashboard" title="Dashboard" active />
-        <ExpandSidebarItem />
+        <ExpandSidebarItem activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
         <SidebarItem icon="settings" title="Settings" />
       </nav>
 

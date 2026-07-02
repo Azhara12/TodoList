@@ -6,7 +6,7 @@ function TaskCard({ task, onDelete, onToggleComplete, onEdit }) {
   const [description, setDescription] = useState(task.description);
 
   const handleSave = () => {
-    onEdit(task.id, { title, description });
+    onEdit(task._id, { title, description });
     setIsEditing(false);
   };
 
@@ -38,8 +38,8 @@ function TaskCard({ task, onDelete, onToggleComplete, onEdit }) {
           
           <div className="flex gap-3 mt-4">
             <button onClick={() => setIsEditing(true)} className="text-violet-600 text-xs font-bold">Edit</button>
-            <button onClick={() => onDelete(task.id)} className="text-red-500 text-xs font-bold">Delete</button>
-            <button onClick={() => onToggleComplete(task.id)} className="text-slate-400 text-xs font-bold">Done</button>
+            <button onClick={() => onDelete(task._id)} className="text-red-500 text-xs font-bold">Delete</button>
+            <button onClick={() => onToggleComplete(task._id)} className="text-slate-400 text-xs font-bold">Done</button>
           </div>
         </div>
       )}

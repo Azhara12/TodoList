@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Login from "./Components/Login";
-import Dashboard from "./Components/Dashboard";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Application load hote hi localStorage check karein
   useEffect(() => {
-    const savedStatus = localStorage.getItem("isLoggedIn");
-    if (savedStatus === "true") {
+    const token = localStorage.getItem("token");
+    if (token) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -16,14 +16,14 @@ function App() {
   // Login successful hone par
   const handleLogin = (status) => {
     if (status === true) {
-      localStorage.setItem("isLoggedIn", "true");
       setIsLoggedIn(true);
     }
   };
 
   // Logout hone par
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("token");
+    localStorage.removeItem("todo_user");
     setIsLoggedIn(false);
   };
 

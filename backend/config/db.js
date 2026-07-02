@@ -5,7 +5,7 @@ const connectDB = async () => {
     try {
         // Set DNS servers to Google/Cloudflare to resolve MongoDB SRV records
         dns.setServers(["8.8.8.8", "1.1.1.1"]);
-        
+
         await mongoose.connect(process.env.MONGODB_URI);
         console.log("MongoDB connected");
     } catch (error) {

@@ -1,7 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db.js");
-const taskRoutes = require("./Routes/taskRoutes.js");
+const taskRoutes = require("./routes/taskRoutes.js");
+const authRoutes = require("./routes/authRoutes.js");
 const cors = require("cors");
 dotenv.config();
 
@@ -16,10 +17,10 @@ connectDB();
 app.get("/", (req, res) => {
   res.json("Data recive in");
 });
+app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
-//post Route banate han data ko insert kerny k lie
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });
