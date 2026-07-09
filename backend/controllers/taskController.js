@@ -5,11 +5,22 @@ const getTasks = async (req, res) => {
   res.json(tasks);
 };
 
+// 2. CREATE TASK WITH CLOUDINARY IMAGE
 const createTask = async (req, res) => {
-  const taskData = { ...req.body, user: req.user.id };
-  const newTask = new Task(taskData);
-  await newTask.save();
-  res.status(201).json(newTask);
+  try {
+    const taskData = { ...req.body, user: req.user.id };
+
+    // Agar user ne file upload ki hai, to Cloudinary ka URL data me add karo
+    if (req.file) {
+      taskData.image = req.file.path; // req.file.path me Cloudinary ka direct URL hota hai
+    }
+
+    const newTask = new Task(taskData);
+    await newTask.save();
+    res.status(201).json(newTask);
+  } catch (error) {
+    res.status(500).json({ message: "Task create karne me error aaya", error: error.message });
+  }
 };
 
 const deleteTask = async (req, res) => {

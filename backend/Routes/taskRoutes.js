@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { protect } = require("../middleware/authMiddleware");
+const { upload } = require("../config/cloudinary"); // 👈 Cloudinary upload middleware import kiya
+
 const {
   getTasks,
   createTask,
@@ -20,8 +22,9 @@ router.use(protect);
 // 1. GET all tasks for the logged in user
 router.get("/", getTasks);
 
-// 2. POST a new task
-router.post("/", createTask);
+// 2. POST a new task (Sath me image upload lagaya)
+// Frontend ya Postman se key ka naam 'image' hona chahiye
+router.post("/", upload.single("image"), createTask); 
 
 // 3. DELETE a task
 router.delete("/:id", deleteTask);

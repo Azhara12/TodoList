@@ -1,32 +1,32 @@
 import { useState } from "react";
 
-// Humne array ke andar "All" ka option dot color ke sath shamil kar diya hai
+// 🎯 Categories array with dots matching your specific setup style
 const CATEGORIES = [
-  { name: "All", dot: "bg-slate-400" },
+  { name: "All", dot: "bg-emerald-400" },
   { name: "Work", dot: "bg-amber-400" },
   { name: "Study", dot: "bg-blue-400" },
-  { name: "Personal", dot: "bg-green-400" },
-  { name: "General", dot: "bg-violet-400" },
-  { name: "Done", dot: "bg-emerald-400" },
+  { name: "Personal", dot: "bg-purple-400" },
+  { name: "General", dot: "bg-slate-400" },
+  { name: "Done", dot: "bg-teal-400" },
 ];
 
 function ExpandSidebarItem({ activeFilter, setActiveFilter, isDarkMode }) {
-  const [show, setShow] = useState(true); // Default open layout matching image screen asset
+  const [show, setShow] = useState(true); // Default tray open layout
 
   return (
-    <div>
-      {/* Clickable Header row selector for the dropdown tray */}
+    <div className="w-full">
+      {/* 📂 Clickable Header Row */}
       <div
         onClick={() => setShow(!show)}
-        className={`flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer transition text-sm font-medium ${
+        className={`flex items-center justify-between px-4 py-2.5 rounded-xl cursor-pointer transition text-xs font-bold uppercase tracking-wider ${
           isDarkMode
-            ? "text-white hover:bg-black hover:text-white"
-            : "text-white hover:bg-black"
+            ? "text-slate-400 hover:bg-[#233545]/40 hover:text-slate-200"
+            : "text-slate-500 hover:bg-slate-100"
         }`}
       >
         <div className="flex items-center gap-3">
           <svg
-            className="w-4 h-4 opacity-80"
+            className="w-4 h-4 opacity-70"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -34,16 +34,16 @@ function ExpandSidebarItem({ activeFilter, setActiveFilter, isDarkMode }) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
+              strokeWidth="2.5"
               d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
             />
           </svg>
           Categories
         </div>
 
-        {/* Toggle chevron arrow icon */}
+        {/* Dynamic Chevron Arrow */}
         <svg
-          className={`w-3.5 h-3.5 transition-transform duration-200 ${show ? "rotate-180" : ""}`}
+          className={`w-3 h-3 transition-transform duration-200 ${show ? "rotate-180" : ""}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -51,34 +51,34 @@ function ExpandSidebarItem({ activeFilter, setActiveFilter, isDarkMode }) {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="2.5"
+            strokeWidth="3"
             d="M19 9l-7 7-7-7"
           />
         </svg>
       </div>
 
-      {/* Child Category Row list render map */}
+      {/* 🎯 Nested Categories Items List */}
       {show && (
-        <div className="mt-1 ml-4 space-y-1">
+        <div className="mt-1 flex flex-col gap-1">
           {CATEGORIES.map((cat) => {
             const isSelected = activeFilter === cat.name;
             return (
               <div
                 key={cat.name}
                 onClick={() => setActiveFilter(cat.name)}
-                className={`flex items-center gap-3 px-4 py-2 rounded-xl cursor-pointer text-xs font-semibold transition ${
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl cursor-pointer text-xs font-semibold tracking-wide transition ${
                   isSelected
                     ? isDarkMode
-                      ? "bg-white/20 text-white"
-                      : "bg-purple-100 text-purple-700 font-bold"
+                      ? "bg-[#233545] text-white shadow-md border border-slate-700/50"
+                      : "bg-emerald-50 text-emerald-700 font-bold border border-emerald-100"
                     : isDarkMode
-                      ? "text-white hover:bg-black/10 hover:text-white"
-                      : "text-white hover:bg-black"
+                      ? "text-slate-400 hover:bg-[#233545]/40 hover:text-slate-200"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
-                {/* Image exact dot circle matcher */}
-                <span className={`w-2 h-2 rounded-full ${cat.dot} shadow-sm`} />
-                {cat.name}
+                {/* Colored Dot Indicator */}
+                <span className={`w-2 h-2 rounded-full ${cat.dot} shadow-sm flex-shrink-0`} />
+                <span className="truncate">{cat.name}</span>
               </div>
             );
           })}
